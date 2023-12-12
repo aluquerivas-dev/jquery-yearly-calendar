@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendario Anual</title>
+    <!-- Incluir jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./yearlyCalendar.jquery.js"></script>
+  </head>
+  <body>
+    <!-- Contenedor para el calendario -->
+    <div id="calendario"></div>
+
+    <script>
+      //Document ready
+      $(document).ready((e) => {
+        var json_options = {
+          year: 2023,
+          longitudDias: 37,
+          calendarClass: "calendarioChulito",
+          forceFirstDay: 7,
+          selectable: true,
+          allowSelectedLessThanCurrentDate: false,
+          monthTranslation: "Meses",
+          selectedDaysFormat: "YYYY-MM-DD",
+          daysToHidenInput: "hiddenDays",
+          monthsArray: [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ],
+          styles: {
+            /* outsideMonth:
+              "background-color: #aabbcc;border: 2px dashed #ff0000;", // Ejemplo de estilo para outside-month */
+          },
+        };
+
+        var calendario = $("#calendario").yearlyCalendar(json_options);
+
+        $("#obtenerDiasSeleccionados").on("click", function () {
+          var diasSeleccionados = calendario.getSelectedDays();
+          $("#diasSeleccionados").html(
+            diasSeleccionados.map((dia) => `<p>${dia}</p>`)
+          );
+        });
+      });
+    </script>
+
+    <button id="obtenerDiasSeleccionados">Obtener Días Seleccionados</button>
+    <p id="diasSeleccionados"></p>
+  </body>
+</html>
